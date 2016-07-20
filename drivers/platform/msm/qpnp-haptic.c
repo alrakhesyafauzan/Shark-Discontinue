@@ -1802,6 +1802,8 @@ static void qpnp_timed_enable_worker(struct work_struct *work)
 	if (!value && !hap->state)
 		return;
 
+	struct qpnp_hap *hap = container_of(dev, struct qpnp_hap,
+					 timed_dev);
 	flush_work(&hap->work);
 
 	mutex_lock(&hap->lock);
@@ -1847,6 +1849,12 @@ static void qpnp_hap_td_enable(struct timed_output_dev *dev, int value)
 	spin_unlock(&hap->td_lock);
 
 	schedule_work(&hap->td_work);
+	}
+	mutex_unlock(&hap->lock);
+	if (hap->play_mode == QPNP_HAP_DIRECT)
+		qpnp_hap_set(hap, hap->state);
+	else
+		schedule_work(&hap->work);
 }
 
 /* play pwm bytes */
