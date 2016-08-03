@@ -1810,6 +1810,7 @@ static void qpnp_timed_enable_worker(struct work_struct *work)
 
 	struct qpnp_hap *hap = container_of(dev, struct qpnp_hap,
 					 timed_dev);
+
 	flush_work(&hap->work);
 
 	mutex_lock(&hap->lock);
@@ -1862,6 +1863,24 @@ static void qpnp_hap_td_enable(struct timed_output_dev *dev, int value)
 		qpnp_hap_set(hap, hap->state);
 	else
 		schedule_work(&hap->work);
+
+	if (value)
+		hrtimer_start(&hap->hap_timer,
+			      ktime_set(value / 1000, (value % 1000) * 1000000),
+			      HRTIMER_MODE_REL);
+}
+
+/* enable interface from timed output class */
+static void qpnp_hap_td_enable(struct timed_output_dev *dev, int value)
+{
+	struct qpnp_hap *hap = container_of(dev, struct qpnp_hap,
+					 timed_dev);
+
+	spin_lock(&hap->td_lock);
+	hap->td_value = value;
+	spin_unlock(&hap->td_lock);
+
+	schedule_work(&hap->td_work);
 }
 
 /* play pwm bytes */
