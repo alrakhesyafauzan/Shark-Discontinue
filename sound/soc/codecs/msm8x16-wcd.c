@@ -5904,6 +5904,7 @@ static struct attribute *sound_control_attrs[] = {
 
 static struct attribute *sound_control_attrs[] = {
 		&headphone_gain_attribute.attr,
+		&mic_gain_attribute.attr,
 		NULL,
 };
 
