@@ -468,6 +468,7 @@ static ssize_t kcal_enable_store(struct device *dev,
 	mdss_mdp_kcal_update_pa(lut_data);
 	//mdss_mdp_kcal_update_igc(lut_data);
 	mdss_mdp_kcal_update_igc(lut_data);
+
 	mdss_mdp_kcal_display_commit();
 
 	if (mdss_mdp_kcal_is_panel_on()) {
