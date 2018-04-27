@@ -893,6 +893,7 @@ static int mdss_dsi_panel_on(struct mdss_panel_data *pdata)
 	display_on = true;
 
     display_on = true;
+
 	display_on = true;
 
 #ifdef CONFIG_POWERSUSPEND
