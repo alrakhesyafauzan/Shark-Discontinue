@@ -348,10 +348,6 @@ config SUSPEND_SKIP_SYNC
 	  user-space before invoking suspend. Say Y if that's your case.
 
 config	BOEFFLA_WL_BLOCKER
-		bool "Boeffla generic wakelock blocker driver"
-		depends on PM
-		default N
-
 	bool "Boeffla generic wakelock blocker driver"
 	depends on PM
 	default y
