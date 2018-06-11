@@ -152,7 +152,6 @@ config CPU_FREQ_DEFAULT_GOV_SCHED
 	  cpu frequency using CPU utilization estimates from the
 	  scheduler.
 
-<<<<<<< HEAD
 config CPU_FREQ_DEFAULT_GOV_BIOSHOCK
 	bool "BioShock"
 	select CPU_FREQ_GOV_BIOSHOCK
